@@ -1,0 +1,68 @@
+{% extends 'layout.html' %}
+
+
+{% block page_title %}Inicio{% endblock %}
+
+{% block page_content %}
+
+
+
+<div class="container my-5">
+
+    <!-- Empresas -->
+    <section class="mb-5">
+        <h2 class="mb-3">Empresas</h2>
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+            {% for empresa in empresas %}
+            <div class="col">
+                <div class="card h-100 shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            <a href="{% url 'remitos_por_empresa' empresa.id %}" style="text-decoration: none; color: inherit;">{{ empresa.nombre }} </a>
+                        </h5>
+                    </div>
+                </div>
+            </div>
+            {% empty %}
+            <p>No hay empresas registradas.</p>
+            {% endfor %}
+        </div>
+    </section>
+
+    <!-- Remitos -->
+    <section class="mb-5">
+        <h2 class="mb-3">Últimos movimientos</h2>
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover table-sm bg-white">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Empresa</th>
+                        <th>Fecha Inicio</th>
+                        <th>Fecha Fin</th>
+                        <th>Importe Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for remito in remitos %}
+                    <tr>
+                        <td><a href="{% url 'remitoDetalle' remito.id %}" style="text-decoration: none; color: inherit;">
+                {{ remito.empresa }}
+            </a></td>
+                        <td>{{ remito.fecha_inicio }}</td>
+                        <td>{{ remito.fecha_fin }}</td>
+                        <td>${{ remito.importe_total }}</td>
+                    </tr>
+                    {% empty %}
+                    <tr><td colspan="4">No hay remitos cargados.</td></tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+  
+
+
+
+
+{% endblock %}

@@ -1,0 +1,56 @@
+{% extends "layout.html" %}
+{% load static %}
+
+{% block title %}Detalle de Días del Remito{% endblock %}
+
+{% block contenedorrr %}
+<div class="container mt-5" style="max-width: 1500px;">
+    <div class="card shadow">
+        <div class="card-header bg-primary text-white">
+            <h3 class="mb-0">Detalle de días para <strong>{{ remito.empresa }}</strong></h3>
+        </div>
+        <div class="card-body mx-3">
+            <div class="table-responsive">
+                <table class="table table-bordered align-middle">
+                    <thead class="table-light">
+                        <tr>
+                            <th>Fecha</th>
+                            <th>Turno</th>
+                            <th>Turno Nro 2</th>
+                            <th>Cantidad de Servicios</th>
+                            <th>Precio del servicio</th>
+                            <th>Horas Extra</th>
+                            <th>Precio por hora</th>
+                            <th>Importe</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for dia in dias %}
+                        <tr>
+                            <td><span class="badge bg-secondary fs-5 py-2 px-6">{{ dia.dia }}</span></td>
+                            <td>{{ dia.get_horario_display }}</td>
+                            <td>{{ dia.get_segundo_horario_display }}</td>
+                            <td>{{ dia.get_servicios_display }}</td>
+                            <td><span class="badge bg-success">${{ dia.precio }}</span></td>
+                            <td>{{ dia.extra }}</td>
+                            <td>${{ dia.precio_extra }}</td>
+                            <td><strong>${{ dia.importe }}</strong></td>
+                        </tr>
+                        {% empty %}
+                        <tr>
+                            <td colspan="10" class="text-center text-muted">No hay días de servicio cargados.</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <div class="mt-4">
+                <a href="{% url 'index' %}" class="btn btn-outline-primary">
+                    <i class="bi bi-arrow-left"></i> Volver al inicio
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+{% endblock %}

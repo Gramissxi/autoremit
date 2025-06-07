@@ -1,0 +1,62 @@
+
+
+
+{% extends 'base.html' %}
+
+{% block page_title %}
+    Página de Remitos
+{% endblock %}
+
+{% block content %}
+{%load static %}
+<header class="bg-dark text-white py-3">
+  <div class="container-fluid text-center">
+    <h1 class="mb-0" style="margin-top: 30px;">Sistema de Remitos</h1>
+  </div>
+</header>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark menu">
+  <div class="container-fluid contenedor">
+    <!-- Logo a la izquierda -->
+    <a class="navbar-brand" href="#">
+      <img src="{% static 'remitos/logo/logo.png' %}" alt="Logo" class="img-fluid" style="max-height: 150px;">
+
+    </a>
+
+    <!-- Botón para colapsar menú en móvil -->
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" 
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Menú y búsqueda -->
+    <div class="collapse navbar-collapse justify-content-center" id="submenu">
+        <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+            <li class="nav-item me-4">
+                <a class="nav-link" href="{% url 'index' %}">Inicio</a>
+            </li>
+            <li class="nav-item me-4">
+                <a class="nav-link" href="{% url 'remito_create' %}">Cargar Remito</a>
+            </li>
+        </ul>
+
+
+      <form class="d-flex mx-auto" role="search">
+        <input class="form-control me-2 bg-secondary text-white border-0" type="search" placeholder="Search" aria-label="Search" />
+        <button class="btn btn-outline-light" type="submit">Search</button>
+      </form>
+    </div>
+  </div>
+</nav>
+
+<h1 class="mt-4 text-center">Bienvenido Matias, te amo <3 </h1>
+
+<div class="container mt-4">
+    {% block page_content %}{% endblock %}
+  </div>
+
+
+{% endblock %}
+{% block contenedor %}{% endblock %}
+{% block contenedorr %}{% endblock %}
+{% block contenedorrr %}{% endblock %}

@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Remito N° {{ remito.id }}</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            font-size: 12px;
+            margin: 30px;
+            color: #222;
+        }
+
+        .header, .section {
+            margin-bottom: 20px;
+        }
+
+        .header h1 {
+            font-size: 22px;
+            margin-bottom: 5px;
+        }
+
+        .header p {
+            margin: 2px 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            border-spacing: 0;
+            margin-top: 10px;
+            table-layout: fixed; /* para que respete anchos */
+        }
+
+        table {
+    border-collapse: collapse;
+    border-spacing: 0;
+    width: 100%;
+}
+
+        tr {
+            margin: 0;
+            padding: 0;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        /* Columna Día */
+        .col-dia {
+            width: 15%;
+            text-align: left;
+            white-space: nowrap;
+            padding-left: 10px;
+        }
+
+        /* Columna Descripción (horarios) - más espacio y puede hacer salto de línea */
+        .col-desc {
+            width: 35%;
+            text-align: left;
+            white-space: normal;
+            padding: 10px 8px;
+        }
+
+        /* Columnas con números - menos ancho y padding más compacto */
+        .col-cant,
+        .col-precio,
+        .col-extra,
+        .col-val-unit,
+        .col-importe {
+            width: auto; /* dejamos que se ajusten según contenido */
+            max-width: 8%;
+            text-align: right;
+            padding: 4px 6px;
+            white-space: nowrap;
+        }
+
+        /* Para Importe que suele tener números más grandes, un poco más ancho */
+        .col-importe {
+            max-width: 12%;
+        }
+
+        .total {
+            margin-top: 20px;
+            text-align: right;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .footer {
+            margin-top: 40px;
+            text-align: center;
+            font-size: 11px;
+            color: #777;
+        }
+
+        .nowrap {
+            white-space: nowrap;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Remito N° {{ remito.id }}</h1>
+        <p><strong>Cliente:</strong> {{ remito.empresa.nombre }}</p>
+        <p><strong>Servicio:</strong> Vigilancia general</p>
+        <p><strong>Fecha del servicio:</strong> del {{ remito.fecha_inicio|date:"d/m/Y" }} al {{ remito.fecha_fin|date:"d/m/Y" }}</p>
+    </div>
+
+    <div class="section">
+        <table>
+            <thead>
+                <tr>
+                    <th class="col-dia">Día</th>
+                    <th class="col-desc">Descripción</th>
+                    <th class="col-cant">Cant. Servicios</th>
+                    <th class="col-precio">Precio</th>
+                    <th class="col-extra">Horas extras</th>
+                    <th class="col-val-unit">Valor unitario</th>
+                    <th class="col-importe">Importe</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for dia in remito.dias.all %}
+                <tr>
+                    <td class="col-dia nowrap">{{ dia.dia }}</td>
+                    <td class="col-desc">
+                        {{ dia.horario }}
+                        {% if dia.segundo_horario %}<br>{{ dia.segundo_horario }}{% endif %}
+                    </td>
+                    <td class="col-cant">
+                        {% if dia.segundo_horario %}2{% else %}1{% endif %}
+                    </td>
+                    <td class="col-precio">${{ dia.precio }}</td>
+                    <td class="col-extra">{{ dia.extra|default:"0" }}</td>
+                    <td class="col-val-unit">{% if dia.precio_extra %}${{ dia.precio_extra }}{% else %}-{% endif %}</td>
+                    <td class="col-importe"><strong>${{ dia.importe }}</strong></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <div class="total">
+            Total: ${{ remito.importe_total }}
+        </div>
+    </div>
+
+    <div class="footer">
+        Este remito fue generado automáticamente por el sistema.
+    </div>
+</body>
+</html>
