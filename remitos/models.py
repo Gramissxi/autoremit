@@ -34,6 +34,7 @@ class Remito(models.Model):
             DiaServicio.objects.create(
                 remito=self,
                 dia=f"{fecha_actual.strftime('%d/%m/%Y')} {dias_semana_es[nombre_dia]} ",  # Ej: Lunes 10/06/2024
+                
                 servicios=1,
                 precio=0,
                 extra=0,
@@ -69,7 +70,9 @@ class Remito(models.Model):
 class DiaServicio(models.Model):
     TURNOS_CHOICES = [
         ("12:00 hs a 18:00 hs", "12:00 hs a 18:00 hs"),
-        ("19:00 hs a 01:00 hs", "19:00 hs a 01:00 hs")
+        ("19:00 hs a 01:00 hs", "19:00 hs a 01:00 hs"),
+        ("19:00 hs a 01:00 hs", "19:00 hs a 01:00 hs"),
+        ("19:00 hs a 01:00 hs", "19:00 hs a 01:00 hs"),
     ]
     CANTIDAD_SERVICIOS = [
         (1, "1 servicio"),
@@ -79,20 +82,18 @@ class DiaServicio(models.Model):
     ]
     
     dia = models.CharField(max_length=15, editable=False)  # No editable
-
     remito = models.ForeignKey(Remito, on_delete=models.CASCADE, related_name='dias')
-    
     horario = models.CharField(max_length=50, choices=TURNOS_CHOICES, blank=True, null=True)
-    segundo_horario = models.CharField(max_length=50, choices=TURNOS_CHOICES, blank=True, null=True)
     servicios = models.IntegerField(choices=CANTIDAD_SERVICIOS)
     precio = models.DecimalField(max_digits=10, decimal_places=2)
-
     extra = models.IntegerField(choices=CANTIDAD_SERVICIOS, null=True, blank=True)
     precio_extra = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
     total_extra = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
 
     importe = models.DecimalField(max_digits=10, decimal_places=2, blank=True)
     fecha = models.DateField(null=True, blank=True)
+    es_feriado= False
+    es_bonificado=False 
 
     def save(self, *args, **kwargs):
     # Calcular importe base

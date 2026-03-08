@@ -7,6 +7,10 @@ from django.http import HttpResponse
 from django.template.loader import get_template
 from xhtml2pdf import pisa
 from .models import Remito, DiaServicio
+from django.template.loader import render_to_string
+from weasyprint import HTML
+from django.http import HttpResponse
+from .models import Remito
 
 def index(request):
     context = {
@@ -109,4 +113,16 @@ def descargar_remito_pdf(request, pk):
 
     if pisa_status.err:
         return HttpResponse('Error al generar el PDF', status=500)
+    return response
+
+
+
+def generar_remito_pdf(request, remito_id):
+    remito = Remito.objects.get(pk=remito_id)
+    html_string = render_to_string('remito.html', {'remito': remito})
+    html = HTML(string=html_string)
+    pdf = html.write_pdf()
+
+    response = HttpResponse(pdf, content_type='application/pdf')
+    response['Content-Disposition'] = f'attachment; filename="remito_{remito.id}.pdf"'
     return response
