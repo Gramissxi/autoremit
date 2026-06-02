@@ -1,0 +1,95 @@
+{% extends 'website/base.html' %}
+{% load static %}
+
+{% block content %}
+
+<section class="hero">
+    <div class="hero-overlay">
+        <div class="hero-content">
+            <span class="tag">Protección que no tiene límites</span>
+
+            <h2>Seguridad profesional,<br>tranquilidad total.</h2>
+
+            <p>
+                Brindamos soluciones integrales de seguridad privada para empresas,
+                eventos y operaciones que exigen máxima confianza y discreción.
+            </p>
+
+            <div class="hero-features">
+                <span>Disponibilidad 24/7</span>
+                <span>Respuesta inmediata</span>
+                <span>Cobertura empresarial</span>
+            </div>
+
+            <div class="hero-buttons">
+                <a href="{% url 'contacto' %}" class="btn-primary">Solicitar asesoramiento</a>
+                <a href="{% url 'servicios' %}" class="btn-secondary">Ver servicios</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="services-section">
+    <span class="section-tag">Nuestros servicios</span>
+    <h2>Soluciones de seguridad a tu medida</h2>
+
+    <div class="cards">
+        <div class="card">
+            <h3>Vigilancia privada</h3>
+            <p>Personal capacitado para protección de instalaciones, empresas y consorcios.</p>
+        </div>
+
+        <div class="card">
+            <h3>Custodia y cobertura</h3>
+            <p>Cobertura profesional para traslados, ejecutivos y situaciones de alto riesgo.</p>
+        </div>
+
+        <div class="card">
+            <h3>Seguridad para eventos</h3>
+            <p>Protección integral para eventos corporativos, sociales y masivos.</p>
+        </div>
+
+        <div class="card">
+            <h3>Supervisión operativa</h3>
+            <p>Control, monitoreo y reportes para garantizar trazabilidad del servicio.</p>
+        </div>
+    </div>
+</section>
+
+<section class="stats">
+    <div><strong>10+</strong><span>Años de experiencia</span></div>
+    <div><strong>250+</strong><span>Clientes satisfechos</span></div>
+    <div><strong>500+</strong><span>Servicios realizados</span></div>
+    <div><strong>24/7</strong><span>Disponibilidad total</span></div>
+</section>
+
+<section class="about" id="nosotros">
+    <div class="about-content">
+        <span class="section-tag">Sobre nosotros</span>
+        <h2>Experiencia, compromiso y profesionalismo</h2>
+        <p>
+            En MI Security combinamos tecnología, entrenamiento y estrategia para ofrecer
+            soluciones de seguridad efectivas, discretas y adaptadas a cada cliente.
+        </p>
+
+        <ul>
+            <li>Personal seleccionado y capacitado</li>
+            <li>Protocolos de seguridad de alto nivel</li>
+            <li>Atención personalizada</li>
+            <li>Cobertura en CABA y GBA</li>
+        </ul>
+    </div>
+
+    <div class="contact-box">
+        <h3>Estamos para ayudarte</h3>
+        <form>
+            <input type="text" placeholder="Nombre y apellido">
+            <input type="text" placeholder="Empresa">
+            <input type="text" placeholder="Teléfono">
+            <textarea placeholder="Mensaje"></textarea>
+            <button type="submit">Enviar mensaje</button>
+        </form>
+    </div>
+</section>
+
+{% endblock %}

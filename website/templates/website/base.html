@@ -1,0 +1,65 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>MI Security | Seguridad privada</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="{% static 'website/css/styles.css' %}">
+</head>
+
+<body>
+
+    <header class="navbar">
+        <div class="logo-box">
+            <img src="{% static 'website/img/logo.png' %}" alt="MI Security" class="logo">
+            <div>
+                <h1>MI SECURITY</h1>
+                <span>Security without limit</span>
+            </div>
+        </div>
+
+        <nav>
+            <a href="{% url 'inicio' %}">Inicio</a>
+            <a href="{% url 'servicios' %}">Servicios</a>
+            <a href="#nosotros">Nosotros</a>
+            <a href="{% url 'contacto' %}">Contacto</a>
+            <a href="/remitos/" class="admin-link">Panel interno</a>
+        </nav>
+    </header>
+
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    <a class="whatsapp" href="https://wa.me/5491112345678" target="_blank">
+        WhatsApp<br>24/7
+    </a>
+
+    <footer class="footer">
+        <div>
+            <h3>MI SECURITY</h3>
+            <p>Soluciones de seguridad profesional para empresas, eventos y operaciones privadas.</p>
+        </div>
+
+        <div>
+            <h4>Navegación</h4>
+            <a href="{% url 'inicio' %}">Inicio</a>
+            <a href="{% url 'servicios' %}">Servicios</a>
+            <a href="{% url 'contacto' %}">Contacto</a>
+        </div>
+
+        <div>
+            <h4>Contacto</h4>
+            <p>CABA, Buenos Aires</p>
+            <p>+54 11 1234 5678</p>
+            <p>info@misecurity.com.ar</p>
+        </div>
+    </footer>
+
+</body>
+
+</html>

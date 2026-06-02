@@ -11,7 +11,9 @@ from django.template.loader import render_to_string
 from weasyprint import HTML
 from django.http import HttpResponse
 from .models import Remito
+from django.contrib.auth.decorators import login_required
 
+@login_required
 def index(request):
     context = {
         'empresas': Empresa.objects.all(),
@@ -21,7 +23,7 @@ def index(request):
     return render(request, 'remitos/index.html', context)
 
 
-
+@login_required
 def remito_create(request):
     if request.method == 'POST':
         form = RemitoForm(request.POST)
@@ -34,7 +36,7 @@ def remito_create(request):
 
     return render(request, 'remitos/remito_form.html', {'form': form})
 
-
+@login_required
 def remito_cargar_dias(request, remito_id):
     remito = Remito.objects.get(id=remito_id)
     dias = DiaServicio.objects.filter(remito=remito)
@@ -76,7 +78,7 @@ def remito_cargar_dias(request, remito_id):
         'dias': dias
     })
 
-
+@login_required
 def remito_detalle(request, pk):
     remito = get_object_or_404(Remito, pk=pk)
     dias_servicio = DiaServicio.objects.filter(remito=remito).order_by('dia')
@@ -87,7 +89,7 @@ def remito_detalle(request, pk):
     })
 
 
-
+@login_required
 def remitos_por_empresa(request, empresa_id):
     empresa = Empresa.objects.get(pk=empresa_id)
     remitos = Remito.objects.filter(empresa=empresa)
@@ -98,7 +100,7 @@ def remitos_por_empresa(request, empresa_id):
     })
 
 
-
+@login_required
 def descargar_remito_pdf(request, pk):
     remito = Remito.objects.get(pk=pk)
     dias = DiaServicio.objects.filter(remito=remito)
@@ -116,7 +118,7 @@ def descargar_remito_pdf(request, pk):
     return response
 
 
-
+@login_required
 def generar_remito_pdf(request, remito_id):
     remito = Remito.objects.get(pk=remito_id)
     html_string = render_to_string('remito.html', {'remito': remito})

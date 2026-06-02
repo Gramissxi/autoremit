@@ -1,0 +1,22 @@
+# Entorno virtual
+.venv/
+
+# Base de datos
+db.sqlite3
+
+# Cache Python
+__pycache__/
+*.pyc
+
+# Variables sensibles
+.env
+
+# Archivos estáticos compilados
+staticfiles/
+
+# VSCode
+.vscode/
+
+# Sistema operativo
+.DS_Store
+Thumbs.db
