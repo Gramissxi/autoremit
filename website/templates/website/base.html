@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <title>MI Security | Seguridad privada</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
     <link rel="stylesheet" href="{% static 'website/css/styles.css' %}">
 </head>
 
@@ -22,11 +22,24 @@
         </div>
 
         <nav>
-            <a href="{% url 'inicio' %}">Inicio</a>
-            <a href="{% url 'servicios' %}">Servicios</a>
-            <a href="#nosotros">Nosotros</a>
-            <a href="{% url 'contacto' %}">Contacto</a>
-            <a href="/remitos/" class="admin-link">Panel interno</a>
+
+            <a href="#">
+                Inicio
+            </a>
+
+            <a href="#servicios">
+                Servicios
+            </a>
+
+            <a href="#nosotros">
+                Nosotros
+            </a>
+
+
+            <a href="/remitos/" class="admin-link">
+                Panel interno
+            </a>
+
         </nav>
     </header>
 
@@ -35,9 +48,12 @@
         {% endblock %}
     </main>
 
-    <a class="whatsapp" href="https://wa.me/5491112345678" target="_blank">
-        WhatsApp<br>24/7
-    </a>
+
+
+    <a class="whatsapp"
+        href="https://wa.me/5491162036480?text=Hola,%20quiero%20consultar%20sobre%20los%20servicios%20de%20seguridad."
+        target="_blank">
+        <i class="fa-brands fa-whatsapp"></i> </a>
 
     <footer class="footer">
         <div>
@@ -46,16 +62,27 @@
         </div>
 
         <div>
+
             <h4>Navegación</h4>
-            <a href="{% url 'inicio' %}">Inicio</a>
-            <a href="{% url 'servicios' %}">Servicios</a>
-            <a href="{% url 'contacto' %}">Contacto</a>
+
+            <a href="#">
+                Inicio
+            </a>
+
+            <a href="#servicios">
+                Servicios
+            </a>
+
+            <a href="#nosotros">
+                Nosotros
+            </a>
+
         </div>
 
         <div>
             <h4>Contacto</h4>
             <p>CABA, Buenos Aires</p>
-            <p>+54 11 1234 5678</p>
+            <p>+54 11 62036480</p>
             <p>info@misecurity.com.ar</p>
         </div>
     </footer>

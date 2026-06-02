@@ -22,14 +22,22 @@
             </div>
 
             <div class="hero-buttons">
-                <a href="{% url 'contacto' %}" class="btn-primary">Solicitar asesoramiento</a>
-                <a href="{% url 'servicios' %}" class="btn-secondary">Ver servicios</a>
+
+                <a href="https://wa.me/5491162036480?text=Hola,%20quiero%20consultar%20sobre%20los%20servicios%20de%20seguridad."
+                    target="_blank" class="btn-primary">
+                    Solicitar asesoramiento
+                </a>
+
+                <a href="#servicios" class="btn-secondary">
+                    Ver servicios
+                </a>
+
             </div>
         </div>
     </div>
 </section>
 
-<section class="services-section">
+<section class="services-section" id="servicios">
     <span class="section-tag">Nuestros servicios</span>
     <h2>Soluciones de seguridad a tu medida</h2>
 
@@ -49,17 +57,13 @@
             <p>Protección integral para eventos corporativos, sociales y masivos.</p>
         </div>
 
-        <div class="card">
-            <h3>Supervisión operativa</h3>
-            <p>Control, monitoreo y reportes para garantizar trazabilidad del servicio.</p>
-        </div>
     </div>
 </section>
 
 <section class="stats">
-    <div><strong>10+</strong><span>Años de experiencia</span></div>
+    <div><strong>25+</strong><span>Años de experiencia</span></div>
     <div><strong>250+</strong><span>Clientes satisfechos</span></div>
-    <div><strong>500+</strong><span>Servicios realizados</span></div>
+    <div><strong>1000+</strong><span>Servicios realizados</span></div>
     <div><strong>24/7</strong><span>Disponibilidad total</span></div>
 </section>
 
@@ -80,16 +84,85 @@
         </ul>
     </div>
 
-    <div class="contact-box">
+
+    <div class="contact-box" id="contacto">
+
         <h3>Estamos para ayudarte</h3>
-        <form>
-            <input type="text" placeholder="Nombre y apellido">
-            <input type="text" placeholder="Empresa">
-            <input type="text" placeholder="Teléfono">
-            <textarea placeholder="Mensaje"></textarea>
-            <button type="submit">Enviar mensaje</button>
+
+        <form id="whatsapp-form">
+
+            <input type="text" id="nombre" placeholder="Nombre y apellido">
+
+            <input type="text" id="empresa" placeholder="Empresa">
+
+            <input type="text" id="telefono" placeholder="Teléfono">
+
+            <textarea id="mensaje" placeholder="Mensaje"></textarea>
+
+            <button type="submit">
+                Enviar mensaje
+            </button>
+
         </form>
+
     </div>
 </section>
+
+<script>
+
+    document
+        .getElementById('whatsapp-form')
+        .addEventListener('submit', async function (e) {
+
+            e.preventDefault();
+
+            const nombre =
+                document.getElementById('nombre').value;
+
+            const empresa =
+                document.getElementById('empresa').value;
+
+            const telefono =
+                document.getElementById('telefono').value;
+
+            const mensaje =
+                document.getElementById('mensaje').value;
+
+            await fetch('/guardar-consulta/', {
+
+                method: 'POST',
+
+                headers: {
+                    'X-CSRFToken':
+                        '{{ csrf_token }}'
+                },
+
+                body: new URLSearchParams({
+                    nombre,
+                    empresa,
+                    telefono,
+                    mensaje
+                })
+            });
+
+            const texto = `
+Hola, quiero consultar sobre los servicios de seguridad.
+
+Nombre: ${nombre}
+Empresa: ${empresa}
+Teléfono: ${telefono}
+
+Consulta:
+${mensaje}
+`;
+
+            window.open(
+                `https://wa.me/5491162036480?text=${encodeURIComponent(texto)}`,
+                '_blank'
+            );
+
+        });
+
+</script>
 
 {% endblock %}
