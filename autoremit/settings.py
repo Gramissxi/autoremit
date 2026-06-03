@@ -28,7 +28,7 @@ SECRET_KEY = 'django-insecure-@@r8#4%mx+lzyfc02+6*vxll#1#37_0+$26p3&+jl2hkno6y#q
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    'autoremit.onrender.com',
+    'misecurity.onrender.com',
     '127.0.0.1',
     'localhost'
 ]
