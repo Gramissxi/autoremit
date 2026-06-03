@@ -5,10 +5,10 @@ from .forms import RemitoForm
 from decimal import Decimal, InvalidOperation
 from django.http import HttpResponse
 from django.template.loader import get_template
-from xhtml2pdf import pisa
+#from xhtml2pdf import pisa
 from .models import Remito, DiaServicio
 from django.template.loader import render_to_string
-from weasyprint import HTML
+#from weasyprint import HTML
 from django.http import HttpResponse
 from .models import Remito
 from django.contrib.auth.decorators import login_required
@@ -99,7 +99,7 @@ def remitos_por_empresa(request, empresa_id):
         'remitos': remitos
     })
 
-
+"""
 @login_required
 def descargar_remito_pdf(request, pk):
     remito = Remito.objects.get(pk=pk)
@@ -128,3 +128,4 @@ def generar_remito_pdf(request, remito_id):
     response = HttpResponse(pdf, content_type='application/pdf')
     response['Content-Disposition'] = f'attachment; filename="remito_{remito.id}.pdf"'
     return response
+"""
